@@ -1,25 +1,31 @@
-var testx = 3;
-var testy = 8;
-
-var testratio1 = "16:9";
-var testsize1 = 17;
-var testaspect1 = getScaledAB(testsize1, testratio1);
-
-var testratio2 = "55:3";
-var testsize2 = 393953;
-var testaspect2 = getScaledAB(testsize2, testratio2);
-
-var testratio3 = "31:5";
-var testsize3 = 52;
-var testaspect3 = getScaledAB(testsize3, testratio3);
-
-
 test( "pythagorean theorem", function() {
-  ok( hypth(testx,testy) == Math.sqrt( Math.pow(testx,2) +  Math.pow(testy,2) ), "Passed!" );
+
+    var testx = 3;
+    var testy = 8;
+
+    ok( hypth(testx,testy) == Math.sqrt( Math.pow(testx,2) +  Math.pow(testy,2) ), "Passed!" );
+
 });
 
 test( "aspect ratio xy", function() {
-    ok( testsize1 == hypth(testaspect1.x, testaspect1.y), "Passed!" );
-    ok( testsize2 == hypth(testaspect2.x, testaspect2.y), "Passed!" );
-    ok( testsize3 == hypth(testaspect3.x, testaspect3.y), "Passed!" );
+
+    var testdata = new Array();
+
+    testdata[0]               = [];
+    testdata[0]['ratio']      = '16:9';
+    testdata[0]['screensize'] = '17';
+
+    testdata[1]               = [];
+    testdata[1]['ratio']      = '31:5';
+    testdata[1]['screensize'] = '52';
+
+    testdata[2]               = [];
+    testdata[2]['ratio']      = '55:3';
+    testdata[2]['screensize'] = '393953';
+
+    for (var i = 0; i < testdata.length; i++) {
+        var testaspect = getScaledAB(testdata[i].screensize, testdata[i].ratio);
+        ok( testdata[i].screensize == hypth(testaspect.x, testaspect.y), "Passed!" );
+    }
+
 });
